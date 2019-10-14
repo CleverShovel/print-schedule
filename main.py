@@ -32,7 +32,9 @@ res = template.render(lessons=lessons)
 
 # css = './css/bootstrap.min.css'
 imgkit.from_string(res, output_file, options={
-   'format': 'png',
+    'quiet': '',
+    # 'xvfb': '',
+    'format': 'png',
     # 'crop-h': '300',
     'crop-w': '610',
     'crop-x': '3',
