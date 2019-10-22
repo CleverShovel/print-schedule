@@ -27,16 +27,17 @@ def add_empty_subgroups(lessons):
 templateEnv.filters['add_empty_subgroups'] = add_empty_subgroups
 templateEnv.filters['max_length_of_groups'] = max_length_of_groups
 
-template = templateEnv.get_template('schedule_wo_bootstrap.html')
+template = templateEnv.get_template('schedule.html')
 res = template.render(lessons=lessons)
 
-# css = './css/bootstrap.min.css'
+# css = './css/w3.css'
 imgkit.from_string(res, output_file, options={
     'quiet': '',
     # 'xvfb': '',
-    'format': 'png',
+    # 'format': 'png'
     # 'crop-h': '300',
-    'crop-w': '610',
-    'crop-x': '3',
-    'crop-y': '3'
+    # 'crop-w': '1366',
+    # 'crop-x': '3',
+    # 'crop-y': '3'
+    'width': '600'
 })
