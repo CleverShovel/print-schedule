@@ -4,7 +4,7 @@ This program use json file to generate picture schedule.
 
 ### Install
 ```bash
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 ### Usage<br>
