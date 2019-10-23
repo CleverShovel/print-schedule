@@ -10,6 +10,8 @@ lessons = json.load(input_file)
 
 templateLoader = FileSystemLoader(searchpath="./")
 templateEnv = Environment(loader=templateLoader)
+templateEnv.trim_blocks = True
+templateEnv.lstrip_blocks = True
 
 def max_length_of_groups(groups):
     return max(map(lambda x : max(map(lambda y: y['subgroup'], x.list)), groups))
@@ -30,7 +32,7 @@ templateEnv.filters['max_length_of_groups'] = max_length_of_groups
 template = templateEnv.get_template('schedule.html')
 res = template.render(lessons=lessons)
 
-# css = './css/w3.css'
+css = ['./css/w3.css', './css/style.css']
 imgkit.from_string(res, output_file, options={
     'quiet': '',
     # 'xvfb': '',
@@ -39,5 +41,6 @@ imgkit.from_string(res, output_file, options={
     # 'crop-w': '1366',
     # 'crop-x': '3',
     # 'crop-y': '3'
-    'width': '600'
-})
+    'width': '1600',
+    'height': '1000'
+}, css=css)
