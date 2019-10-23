@@ -2,8 +2,13 @@
 
 This program use json file to generate picture schedule.
 
-The usage:<br>
-`python3 main.py in.json out.jpg`
+### Install
+```bash
+pip install requirements.txt
+```
+
+### Usage<br>
+`python main.py in.json out.jpg`
 
 Json file should be an array with the following structure:
 ```javascript
@@ -21,4 +26,5 @@ Json file should be an array with the following structure:
 ]
 ```
 
+### Dependencies
 Python script use [imgkit](https://github.com/jarrekk/imgkit) for rendering html. Additional info in readme for imgkit.
