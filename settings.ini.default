@@ -1,0 +1,3 @@
+[GENERAL]
+TEMPLATE_FOLDER = ./templates
+OPTIONS_FILE = ./options/options.json

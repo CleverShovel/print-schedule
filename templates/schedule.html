@@ -9,7 +9,7 @@
 
 <body>
   <div class="Date">
-    <p>00.00.0000</p>
+    <p>{{ date }}</p>
   </div>
   {% set max_count = lessons|groupby('time_start')|max_length_of_groups %}
   {% for group in lessons|groupby('time_start') %}

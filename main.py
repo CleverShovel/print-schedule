@@ -4,13 +4,34 @@ from jinja2 import Environment, FileSystemLoader
 import imgkit
 import json
 import sys
+from os import path
+from configparser import ConfigParser
+
 
 input_file = open(sys.argv[1], "r")
 output_file = sys.argv[2]
 
-lessons = json.load(input_file)
 
-templateLoader = FileSystemLoader(searchpath="./")
+cur_folder = path.dirname(path.realpath(__file__))
+
+settings_file = path.join(cur_folder, 'settings.ini')
+def_settings_file = path.join(cur_folder, 'settings.ini.default')
+
+config = ConfigParser()
+config.read(settings_file if path.isfile(settings_file) else def_settings_file)
+
+general = config['GENERAL']
+template_folder = general['TEMPLATE_FOLDER']
+options_file = open(general['OPTIONS_FILE'], "r")
+
+css_folder = path.join(cur_folder, 'css')
+options = json.load(options_file)
+
+js_dict = json.load(input_file)
+date = js_dict["date"]
+lessons = js_dict["lessons"]
+
+templateLoader = FileSystemLoader(searchpath=template_folder)
 templateEnv = Environment(loader=templateLoader)
 templateEnv.trim_blocks = True
 templateEnv.lstrip_blocks = True
@@ -32,17 +53,7 @@ templateEnv.filters['add_empty_subgroups'] = add_empty_subgroups
 templateEnv.filters['max_length_of_groups'] = max_length_of_groups
 
 template = templateEnv.get_template('schedule.html')
-res = template.render(lessons=lessons)
+res = template.render(date=date, lessons=lessons)
 
-css = ['./css/w3.css', './css/style.css']
-imgkit.from_string(res, output_file, options={
-    'quiet': '',
-    # 'xvfb': '',
-    # 'format': 'png'
-    # 'crop-h': '300',
-    # 'crop-w': '1366',
-    # 'crop-x': '3',
-    # 'crop-y': '3'
-    'width': '1600',
-    'height': '1000'
-}, css=css)
+css = [path.join(css_folder, 'w3.css'), path.join(css_folder, 'style.css')]
+imgkit.from_string(res, output_file, options=options, css=css)
