@@ -1,3 +1,4 @@
 [GENERAL]
 TEMPLATE_FOLDER = ./templates
+CSS_FOLDER = ./css
 OPTIONS_FILE = ./options/default_options.json

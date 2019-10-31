@@ -22,9 +22,9 @@ config.read(settings_file if path.isfile(settings_file) else def_settings_file)
 
 general = config['GENERAL']
 template_folder = general['TEMPLATE_FOLDER']
+css_folder = general["CSS_FOLDER"]
 options_file = open(general['OPTIONS_FILE'], "r")
 
-css_folder = path.join(cur_folder, 'css')
 options = json.load(options_file)
 
 js_dict = json.load(input_file)
